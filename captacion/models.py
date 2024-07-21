@@ -1,10 +1,10 @@
 from django.db import models
-from .validators import validar_camposvacios, validar_logitud
+from .validators import validar_nombre_tipo, validar_logitud
 from django.core.validators import EmailValidator
 
 # Create your models here.
 class Tipo(models.Model):
-    nombre = models.CharField(max_length=30, unique=True)
+    nombre = models.CharField(max_length=30, unique=True, validators=[validar_nombre_tipo])
     def __str__(self):
         return self.nombre
     

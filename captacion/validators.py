@@ -7,3 +7,7 @@ def validar_camposvacios(value):
 def validar_logitud(value):
     if len(value)>10:
         raise ValidationError("%(valor)s no puede ser maximo es de 10 caracteres", params={"valor": value})
+    
+def validar_nombre_tipo(value):
+    if value =="Brangus":
+        raise ValidationError("No es nombre valido") 
