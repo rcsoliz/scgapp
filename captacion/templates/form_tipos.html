@@ -1,0 +1,20 @@
+<h1>Tipos</h1>
+<form action="{% url 'tipos' %}" method="POST">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>Tipo</h1></legend>
+        {% if error_message %}
+        <p class="error">{{error_message}}</p>
+        {% endif %}
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre"/>
+        <br/>
+        <input type="submit" value="Enviar"/>
+    </fieldset>
+</form>
+
+<ul>
+    {% for tipo in tipos %}
+        <li> {{ tipo }} </li>
+    {% endfor %}
+</ul>
