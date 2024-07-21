@@ -1,4 +1,6 @@
 from django.db import models
+from .validators import validar_camposvacios, validar_logitud
+from django.core.validators import EmailValidator
 
 # Create your models here.
 class Tipo(models.Model):
@@ -14,7 +16,7 @@ class Residencia(models.TextChoices):
 class Ganado(models.Model):
     nombre= models.CharField(max_length=30, unique=True)
     tipo =models.ForeignKey(Tipo, on_delete=models.CASCADE)
-    descripcion = models.CharField(max_length=255, blank=True)
+    descripcion = models.CharField(max_length=255, blank=True, validators=[validar_logitud])
     created= models.DateTimeField(auto_now_add=True)
     updated= models.DateTimeField(auto_now=True)
     disponible = models.BooleanField(blank=True, default=True)
@@ -34,7 +36,7 @@ class Ganadero(models.Model):
     ci= models.CharField(max_length=20)
     telefono= models.CharField(max_length=20)
     celular= models.CharField(max_length=12)
-    email= models.CharField(max_length=30)
+    email= models.CharField(max_length=30, validators=[EmailValidator('No es un email valido')])
     disponible = models.BooleanField(blank=True, default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -52,7 +54,7 @@ class Zona(models.Model):
 class Estancia(models.Model):
     nombre= models.CharField(max_length=60)
     zona= models.ForeignKey(Zona, on_delete=models.CASCADE)
-    descripcion = models.CharField(max_length=200, blank=True)
+    descripcion = models.CharField(max_length=200, blank=True )
     coordenadax= models.CharField(max_length=30)
     coordenaday= models.CharField(max_length=30)
     disponible = models.BooleanField(blank=True, default=True)
